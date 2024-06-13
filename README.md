@@ -10,12 +10,12 @@ By leveraging these APIs, the optimizer ensures that schedules are always up-to-
 
 ## Features
 
-- **User Input Interface**: The application begins with a user-friendly window where students can enter their student ID, work facility name, and a schedule template.
+- **User Input Interface**: The application begins with a user-friendly window where student coordinators and admin coordinators from the Dining Student Office can enter the student IDs, work facility names, and schedule templates for the students they are scheduling.
 - **Class Schedule Integration**: Retrieves student class schedules using the Workday REST API, ensuring up-to-date and accurate information.
 - **Work Shift Integration**: Retrieves available work shifts using the Schedule Source API, providing a comprehensive list of potential work times.
-- **Excel Schedule Generation**: Automatically generates an Excel spreadsheet marking all class times as unavailable, allowing students to see their commitments at a glance.
-- **Conflict Resolution**: Filters out work shifts that overlap with class times, presenting students with only the shifts they can realistically work.
-- **File Path Display**: After generating the schedule, a new window pops up to display the file path of the generated Excel sheet, making it easy for students to locate and use the file.
+- **Excel Schedule Generation**: Automatically generates an Excel spreadsheet marking all class times as unavailable, allowing coordinators to see students' commitments at a glance.
+- **Conflict Resolution**: Filters out work shifts that overlap with class times, presenting coordinators with only the shifts that students can realistically work.
+- **File Path Display**: After generating the schedule, a new window pops up to display the file path of the generated Excel sheet, making it easy for coordinators to locate and use the file.
 
 ![diagram-export-11-06-2024-13_20_06](https://github.com/TpSoftDev/Class-and-Work-Schedule-Optimizer/assets/170199259/1e1cb687-3173-4260-8f13-4d3b2d481024)
 
@@ -31,16 +31,16 @@ By leveraging these APIs, the optimizer ensures that schedules are always up-to-
    python application.py
    ```
 2. A window will prompt you to enter the following information:
-   - **Student ID**: Your unique student identifier.
-   - **Work Facility Name**: The name of your work facility.
-   - **Schedule Template**: The template for your schedule.
+   - **Student ID**: The unique student identifier.
+   - **Work Facility Name**: The name of the work facility.
+   - **Schedule Template**: The template for the schedule.
 
 3. After entering the required information, press "OK" to proceed.
 4. The application will:
-   - Make an API call to the Workday REST API to retrieve your class schedule.
-   - Generate an Excel spreadsheet (`Timetable.xlsx`) with your class times marked as unavailable.
+   - Make an API call to the Workday REST API to retrieve the class schedule.
+   - Generate an Excel spreadsheet (`Timetable.xlsx`) with class times marked as unavailable.
    - Make an API call to the Schedule Source website to retrieve available work shifts.
-   - Filter out work shifts that conflict with your class times.
+   - Filter out work shifts that conflict with class times.
    - Display a new window with the file path of the generated Excel sheet.
 
 ## Project Structure
@@ -61,4 +61,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 For questions, support, or to report issues, please open an issue in the repository or contact the project maintainer.
-
