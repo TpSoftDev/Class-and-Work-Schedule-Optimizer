@@ -17,7 +17,8 @@ By leveraging these APIs, the optimizer ensures that schedules are always up-to-
 - **Conflict Resolution**: Filters out work shifts that overlap with class times, presenting coordinators with only the shifts that students can realistically work.
 - **File Path Display**: After generating the schedule, a new window pops up to display the file path of the generated Excel sheet, making it easy for coordinators to locate and use the file.
 
-![diagram-export-11-06-2024-13_20_06](https://github.com/TpSoftDev/Class-and-Work-Schedule-Optimizer/assets/170199259/1e1cb687-3173-4260-8f13-4d3b2d481024)
+![diagram-export-11-06-2024-13_20_06](https://github.com/TpSoftDev/Class-and-Work-Schedule-Optimizer/assets/170199259/072aee45-f24b-4a37-b110-300b14cf4912)
+
 
 
 ### Prerequisites
