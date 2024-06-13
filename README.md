@@ -19,6 +19,7 @@ By leveraging these APIs, the optimizer ensures that schedules are always up-to-
 
 ![diagram-export-11-06-2024-13_20_06](https://github.com/TpSoftDev/Class-and-Work-Schedule-Optimizer/assets/170199259/1e1cb687-3173-4260-8f13-4d3b2d481024)
 
+
 ### Prerequisites
 
 - Python 3.6 or higher
