@@ -1,6 +1,6 @@
 # Class and Work Schedule Optimizer
 
-The Class and Work Schedule Optimizer is a powerful Python application developed for Iowa State University's Dining Student Services. It revolutionizes the scheduling process by seamlessly integrating with Iowa State's Workday API for student schedules and ISU Dining's Schedule Source API for available work shifts.
+The Class and Work Schedule Optimizer is a powerful Python application developed for Iowa State University's Dining Student Services Office. It revolutionizes the scheduling process by seamlessly integrating with Iowa State's Workday API for student schedules and ISU Dining's Schedule Source API for available work shifts.
 
 ## Overview
 
