@@ -10,6 +10,7 @@ from utils.helperFunctions import convert_to_readable_time, quicksort_shifts, fo
 from api_calls.schedule_source_api.schedule_source_api import getScheduleId, getEmptyShiftsForDay, getLocations, getScheduleNames
 from availabilityCalculator.main import filterEmptyShiftsForDay
 
+
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
