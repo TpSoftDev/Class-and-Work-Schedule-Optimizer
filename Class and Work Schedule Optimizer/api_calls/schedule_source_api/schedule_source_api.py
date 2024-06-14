@@ -211,5 +211,25 @@ def getScheduleNames(location):
     for item in json_data:
         names.append(item["Name"])
     return names
+
+
+# API call to update (PUT) the availability of a student employee
+def updateAvailability(newAvailability):
+    credentials = authenticate("ISU", "seans3", "8032")
+    conn = http.client.HTTPSConnection("test.tmwork.net")
+    payload = newAvailability
+
+    headers = {
+        "Content-Type": "application/json",
+        "x-session-id": credentials["sessionId"],
+        "x-api-token": credentials["apiToken"],
+    }
+
+    payload_json = json.dumps(payload)
+    
+    url = Paths.SS_AVAILABILITY.value
+    conn.request("PUT", url, payload_json, headers)
+    res = conn.getresponse()
+    data = res.read()
+    print(data)
         
-# getScheduleNames("MU Food Court")
