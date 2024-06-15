@@ -1,169 +1,42 @@
 ############################################ Update Availability in Schedule Source ####################################
 from datetime import datetime, timedelta
 
-# Code Summary :
-# This code will generate a list of available times for each day,
-# remove times that overlap with the employee's class schedule,
-# and then condense these times into ranges for easier readability.
-
 # Define the employee availability data
 employee_availability = [
-    {
-        "DayId": 1,
-        "AvailableRanges": "5am-11am;1:45pm-5pm;6:15pm-11:15pm;",
-        "LastName": "Abbasani",
-        "FirstName": "Hari Preetham Reddy (Preetham)",
-        "EmployeeExternalId": 170601496
-    },
-    {
-        "DayId": 2,
-        "AvailableRanges": "5am-9am",
-        "LastName": "Abbasani",
-        "FirstName": "Hari Preetham Reddy (Preetham)",
-        "EmployeeExternalId": 170601496
-    },
-    {
-        "DayId": 3,
-        "AvailableRanges": "12:01am-11:59pm",
-        "LastName": "Abbasani",
-        "FirstName": "Hari Preetham Reddy (Preetham)",
-        "EmployeeExternalId": 170601496
-    },
-    {
-        "DayId": 4,
-        "AvailableRanges": None,
-        "LastName": "Abbasani",
-        "FirstName": "Hari Preetham Reddy (Preetham)",
-        "EmployeeExternalId": 170601496
-    },
-    {
-        "DayId": 5,
-        "AvailableRanges": None,
-        "LastName": "Abbasani",
-        "FirstName": "Hari Preetham Reddy (Preetham)",
-        "EmployeeExternalId": 170601496
-    },
-    {
-        "DayId": 6,
-        "AvailableRanges": None,
-        "LastName": "Abbasani",
-        "FirstName": "Hari Preetham Reddy (Preetham)",
-        "EmployeeExternalId": 170601496
-    },
-    {
-        "DayId": 7,
-        "AvailableRanges": None,
-        "LastName": "Abbasani",
-        "FirstName": "Hari Preetham Reddy (Preetham)",
-        "EmployeeExternalId": 170601496
-    }
+    {"DayId": 1, "AvailableRanges": "5am-11am;1:45pm-5pm;6:15pm-11:15pm;", "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
+    {"DayId": 2, "AvailableRanges": "5am-9am", "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
+    {"DayId": 3, "AvailableRanges": "12:01am-11:59pm", "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
+    {"DayId": 4, "AvailableRanges": None, "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
+    {"DayId": 5, "AvailableRanges": None, "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
+    {"DayId": 6, "AvailableRanges": None, "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
+    {"DayId": 7, "AvailableRanges": None, "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496}
 ]
 
 # Define the employee class schedule data
 employee_classSchedule = [
-    {
-        "subject": "Physics",
-        "start": "12:00:00 PM",
-        "end": "1:00:00 PM",
-        "meetingDays": "M"
-    },
-    {
-        "subject": "Math",
-        "start": "7:00:00 AM",
-        "end": "5:00:00 PM",
-        "meetingDays": "T"
-    },
-    {
-        "subject": "Hello",
-        "start": "11:30:00 AM",
-        "end": "12:45:00 PM",
-        "meetingDays": "W"
-    },
-    {
-        "subject": "Science",
-        "start": "10:00:00 AM",
-        "end": "8:00:00 PM",
-        "meetingDays": "U"
-    }
+    {"subject": "Physics", "start": "07:00:00 AM", "end": "1:00:00 PM", "meetingDays": "U"},
+    {"subject": "Math", "start": "2:00:00 PM", "end": "8:00:00 PM", "meetingDays": "U"},
+    {"subject": "Hello", "start": "11:35:00 AM", "end": "12:45:00 PM", "meetingDays": "F"},
+    {"subject": "Science", "start": "05:00:00 AM", "end": "07:00:00 AM", "meetingDays": "T"}
 ]
 
 def generate_available_times_per_day():
-    """
-    Generate a dictionary with available times for each day of the week,
-    where times are in 5-minute intervals from 00:00 to 23:59.
-
-    Returns:
-        dict: A dictionary with days of the week as keys and lists of available times as values.
-    """
-    available_times_per_day = {
-        'Sunday': [],
-        'Monday': [],
-        'Tuesday': [],
-        'Wednesday': [],
-        'Thursday': [],
-        'Friday': [],
-        'Saturday': []
-    }
-
-    # Populate available times per day with 5-minute intervals
-    for day in available_times_per_day:
-        for hour in range(24):
-            for minute in range(0, 60, 5):
-                time_str = f"{hour:02d}:{minute:02d}"
-                available_times_per_day[day].append(time_str)
-
+    """Generate a dictionary with available times for each day of the week."""
+    available_times_per_day = {day: [f"{hour:02d}:{minute:02d}" for hour in range(24) for minute in range(0, 60, 5)] for day in ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]}
     return available_times_per_day
 
 def time_to_minutes(time_str):
-    """
-    Convert a time string in "HH:MM" format to minutes from midnight.
-
-    Args:
-        time_str (str): Time string in "HH:MM" format.
-
-    Returns:
-        int: Minutes since midnight.
-    """
+    """Convert a time string in "HH:MM" format to minutes from midnight."""
     time_obj = datetime.strptime(time_str, "%H:%M")
     return time_obj.hour * 60 + time_obj.minute
 
 def remove_class_times(available_times, start, end):
-    """
-    Remove times from the available times list that fall within the class time range.
-
-    Args:
-        available_times (list): List of available times in "HH:MM" format.
-        start (int): Start time in minutes since midnight.
-        end (int): End time in minutes since midnight.
-
-    Returns:
-        list: Updated list of available times.
-    """
-    return [
-        time for time in available_times
-        if not (start <= time_to_minutes(time) < end)
-    ]
+    """Remove times from the available times list that fall within the class time range."""
+    return [time for time in available_times if not (start <= time_to_minutes(time) < end)]
 
 def process_class_schedule(available_times_per_day, class_schedule):
-    """
-    Process the class schedule and update available times by removing class times.
-
-    Args:
-        available_times_per_day (dict): Dictionary with available times for each day.
-        class_schedule (list): List of class schedules with start, end, and meeting days.
-
-    Returns:
-        dict: Updated available times per day.
-    """
-    days_map = {
-        'U': 'Sunday',
-        'M': 'Monday',
-        'T': 'Tuesday',
-        'W': 'Wednesday',
-        'R': 'Thursday',
-        'F': 'Friday',
-        'A': 'Saturday'
-    }
+    """Process the class schedule and update available times by removing class times."""
+    days_map = {'U': 'Sunday', 'M': 'Monday', 'T': 'Tuesday', 'W': 'Wednesday', 'R': 'Thursday', 'F': 'Friday', 'A': 'Saturday'}
 
     for class_info in class_schedule:
         start_time_minutes = time_to_minutes(datetime.strptime(class_info["start"], "%I:%M:%S %p").strftime("%H:%M"))
@@ -172,58 +45,45 @@ def process_class_schedule(available_times_per_day, class_schedule):
 
         for day in meeting_days:
             day_name = days_map[day]
-            available_times_per_day[day_name] = remove_class_times(
-                available_times_per_day[day_name],
-                start_time_minutes,
-                end_time_minutes
-            )
+            available_times_per_day[day_name] = remove_class_times(available_times_per_day[day_name], start_time_minutes, end_time_minutes)
 
     return available_times_per_day
 
 def condense_times(times):
-    """
-    Condense a list of times into ranges.
-
-    Args:
-        times (list): List of times in "HH:MM" format.
-
-    Returns:
-        list: A list of time ranges in the format "HH:MM-HH:MM".
-    """
-    ranges = []
+    """Condense a list of times into ranges."""
     if not times:
-        return ranges
+        return []
 
-    start = times[0]
-    previous = times[0]
+    ranges = []
+    start = previous = times[0]
 
     for time in times[1:]:
-        current_hour, current_minute = map(int, time.split(':'))
-        previous_hour, previous_minute = map(int, previous.split(':'))
-
-        # Check if the current time is the next 5-minute interval after the previous time
-        if not (current_hour == previous_hour and current_minute == previous_minute + 5) and not (
-                current_hour == previous_hour + 1 and current_minute == 0 and previous_minute == 55):
-            end = previous
-            ranges.append(f"{start}-{end}")
+        if time_to_minutes(time) != time_to_minutes(previous) + 5:
+            ranges.append(f"{start}-{previous}")
             start = time
-
         previous = time
 
-    ranges.append(f"{start}-{previous}")  # Add the last range
+    ranges.append(f"{start}-{previous}")
     return ranges
 
 def condense_available_times_per_day(available_times_per_day):
-    """
-    Condense the available times into ranges for each day of the week.
-
-    Args:
-        available_times_per_day (dict): A dictionary with days of the week as keys and lists of available times as values.
-
-    Returns:
-        dict: A dictionary with days of the week as keys and lists of condensed time ranges as values.
-    """
+    """Condense the available times into ranges for each day of the week."""
     return {day: condense_times(times) for day, times in available_times_per_day.items()}
+
+def convert_to_12_hour_format(time_str):
+    """Convert a time string from 24-hour format to 12-hour format."""
+    time_obj = datetime.strptime(time_str, "%H:%M")
+    return time_obj.strftime("%I:%M%p").lstrip('0').lower()
+
+def format_ranges_12_hour(ranges):
+    """Convert and format time ranges from 24-hour format to 12-hour format."""
+    formatted_ranges = []
+    for time_range in ranges:
+        start, end = time_range.split('-')
+        start_12 = convert_to_12_hour_format(start)
+        end_12 = convert_to_12_hour_format(end)
+        formatted_ranges.append(f"{start_12}-{end_12}")
+    return ';'.join(formatted_ranges) + ';'
 
 # Generate available times per day
 available_times_per_day = generate_available_times_per_day()
@@ -234,6 +94,7 @@ available_times_per_day = process_class_schedule(available_times_per_day, employ
 # Condense available times into ranges for each day
 condensed_available_times_per_day = condense_available_times_per_day(available_times_per_day)
 
-# Output the condensed available times per day
+# Convert to 12-hour format and print the results
 for day, ranges in condensed_available_times_per_day.items():
-    print(day, ranges)
+    formatted_ranges = format_ranges_12_hour(ranges)
+    print(f"{day}: {formatted_ranges}")
