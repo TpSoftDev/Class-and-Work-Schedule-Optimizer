@@ -1,23 +1,12 @@
-############################################ Update Availability in Schedule Source ####################################
+##################################################### Update Availability ##############################################
 from datetime import datetime, timedelta
-
-# Define the employee availability data
-employee_availability = [
-    {"DayId": 1, "AvailableRanges": "5am-11am;1:45pm-5pm;6:15pm-11:15pm;", "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
-    {"DayId": 2, "AvailableRanges": "5am-9am", "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
-    {"DayId": 3, "AvailableRanges": "12:01am-11:59pm", "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
-    {"DayId": 4, "AvailableRanges": None, "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
-    {"DayId": 5, "AvailableRanges": None, "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
-    {"DayId": 6, "AvailableRanges": None, "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496},
-    {"DayId": 7, "AvailableRanges": None, "LastName": "Abbasani", "FirstName": "Hari Preetham Reddy (Preetham)", "EmployeeExternalId": 170601496}
-]
 
 # Define the employee class schedule data
 employee_classSchedule = [
-    {"subject": "Physics", "start": "07:00:00 AM", "end": "1:00:00 PM", "meetingDays": "U"},
-    {"subject": "Math", "start": "2:00:00 PM", "end": "8:00:00 PM", "meetingDays": "U"},
-    {"subject": "Hello", "start": "11:35:00 AM", "end": "12:45:00 PM", "meetingDays": "F"},
-    {"subject": "Science", "start": "05:00:00 AM", "end": "07:00:00 AM", "meetingDays": "T"}
+    {"subject": "Physics", "start": "09:15:00 AM", "end": "12:00:00 PM", "meetingDays": "UM"},
+    {"subject": "Math", "start": "6:05:00 PM", "end": "3:15:00 PM", "meetingDays": "UR"},
+    {"subject": "Hello", "start": "11:35:00 AM", "end": "9:45:00 PM", "meetingDays": "FA"},
+    {"subject": "Science", "start": "05:00:00 AM", "end": "07:25:00 AM", "meetingDays": "T"}
 ]
 
 def generate_available_times_per_day():
