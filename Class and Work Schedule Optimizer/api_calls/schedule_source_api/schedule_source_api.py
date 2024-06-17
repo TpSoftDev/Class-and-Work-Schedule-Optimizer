@@ -233,3 +233,4 @@ def updateAvailability(newAvailability):
     data = res.read()
     print(data)
         
+

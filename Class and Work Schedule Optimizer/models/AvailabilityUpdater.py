@@ -1,5 +1,13 @@
 ############################################ Update Availability in Schedule Source ####################################
 from datetime import datetime, timedelta
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+external_directory = os.path.join(current_dir, "..")
+sys.path.append(external_directory)
+from utils.helperFunctions import convert_to_availability
+from api_calls.schedule_source_api.schedule_source_api import updateAvailability
 
 # Code Summary :
 # This code will generate a list of available times for each day,
@@ -234,6 +242,9 @@ available_times_per_day = process_class_schedule(available_times_per_day, employ
 # Condense available times into ranges for each day
 condensed_available_times_per_day = condense_available_times_per_day(available_times_per_day)
 
+employee_availability = []
 # Output the condensed available times per day
 for day, ranges in condensed_available_times_per_day.items():
-    print(day, ranges)
+    employee_availability.append(convert_to_availability(day, ranges, 170601496))
+
+updateAvailability(employee_availability)

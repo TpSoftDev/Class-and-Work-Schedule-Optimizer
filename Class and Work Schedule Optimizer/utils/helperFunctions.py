@@ -62,3 +62,69 @@ def getLocationNames(locations):
         string_list.append(item["ExternalBusinessId"])
     return string_list
 
+
+def convert_to_day_id(dayChar):
+    if dayChar == 'U':
+        return 1
+    elif dayChar =='M':
+        return 2
+    elif dayChar == 'T':
+        return 3
+    elif dayChar =='W':
+        return 4
+    elif dayChar == 'R':
+        return 5
+    elif dayChar =='F':
+        return 6
+    elif dayChar == 'S':
+        return 7
+    else:
+        return 0
+  
+def convert_to_availability(day, ranges, studentId):
+    timeString = ""
+    for timeRange in ranges:
+        newTimeRange = convert_time_range(timeRange)
+        timeString += newTimeRange + ";"
+    
+    ret = {
+        "DayId": day,
+        "AvailableRanges": timeString,
+        "EmployeeExternalId": studentId
+    }
+    
+    return ret
+
+                
+
+def convert_to_12_hour_format(time_24):
+    # Split the input time into hours and minutes
+    hours, minutes = map(int, time_24.split(':'))
+    
+    # Determine the period (AM/PM)
+    period = "AM" if hours < 12 else "PM"
+    
+    # Adjust hours for 12-hour format
+    hours = hours % 12
+    if hours == 0:
+        hours = 12
+    
+    # Format the new time string without space between time and period
+    time_12 = f"{hours}:{minutes:02d}{period}"
+    return time_12   
+
+def convert_time_range(time_range):
+    # Split the time range into two times
+    time_1, time_2 = time_range.split('-')
+    
+    # Convert each time to 12-hour format
+    time_1_12 = convert_to_12_hour_format(time_1)
+    time_2_12 = convert_to_12_hour_format(time_2)
+    
+    # Combine the two converted times into the final format
+    return f"{time_1_12}-{time_2_12}"               
+
+        
+
+
+    
