@@ -96,7 +96,6 @@ def convert_to_availability(day, ranges, studentId):
     return ret
 
                 
-
 def convert_to_12_hour_format(time_24):
     # Split the input time into hours and minutes
     hours, minutes = map(int, time_24.split(':'))
@@ -124,7 +123,17 @@ def convert_time_range(time_range):
     # Combine the two converted times into the final format
     return f"{time_1_12}-{time_2_12}"               
 
-        
+def parse_tsv(tsv_data):
+    # Split data into lines
+    lines = tsv_data.strip().split('\r\n')
+    # Extract headers
+    headers = lines[0].split('\t')
+    # Parse each line into a dictionary
+    data = [
+        dict(zip(headers, line.split('\t')))
+        for line in lines[1:]
+    ]
+    return data    
 
 
     

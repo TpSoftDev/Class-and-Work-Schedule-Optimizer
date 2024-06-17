@@ -3,9 +3,15 @@ from datetime import datetime, timedelta
 import os 
 import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
+print(f"Current Directory: {current_dir}")
+
 external_directory = os.path.join(current_dir, "..")
+print(f"External Directory: {external_directory}")
+
 sys.path.append(external_directory)
-from api_calls.schedule_source_api.schedule_source_api import updateAvailability
+print(f"System Path: {sys.path}")
+
+from api_calls.schedule_source_api.schedule_source_api import updateAvailability, getAllActiveEmployees
 
 # Code Summary :
 # This code will generate a list of available times for each day,
@@ -153,16 +159,26 @@ for day, ranges in condensed_available_times_per_day.items():
     formatted_ranges = format_ranges_12_hour(ranges)
     print(f"{day}: {formatted_ranges}")
     avail_ranges.append(formatted_ranges)
+    
+#Retrieve all employee's external id numbers
+employees = getAllActiveEmployees()
+employeeIds = []
+for person in employees:
+    if person["ExternalId"]:
+        employeeIds.append(person["ExternalId"])
+
+print(employeeIds)
 
 updatedData = []
 for i in range(1, 8):
     updatedData.append({
         "DayId": i,
         "AvailableRanges": avail_ranges[i-1], 
-        "EmployeeExternalId": 170601496   
+        "EmployeeExternalId": 170601496,
+        "Enabled": 1
     })
-
 updateAvailability(updatedData)
+print("UPDATED")
 
 
     
