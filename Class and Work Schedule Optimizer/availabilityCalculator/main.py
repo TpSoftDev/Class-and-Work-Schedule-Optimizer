@@ -9,7 +9,6 @@ sys.path.append(external_directory)
 from api_calls.workday_api.workday_api import getStudentSchedule
 from api_calls.schedule_source_api.schedule_source_api import getEmptyShiftsForDay
 from utils.helperFunctions import convert_to_time, convert_to_day_id
-from models.TimeRange import TimeRange
 
 
 
