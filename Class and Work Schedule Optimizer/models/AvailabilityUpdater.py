@@ -1,5 +1,11 @@
 ##################################################### Update Availability ##############################################
 from datetime import datetime, timedelta
+import os 
+import sys
+current_dir = os.path.dirname(os.path.abspath(__file__))
+external_directory = os.path.join(current_dir, "..")
+sys.path.append(external_directory)
+from api_calls.schedule_source_api.schedule_source_api import updateAvailability
 
 # Code Summary :
 # This code will generate a list of available times for each day,
@@ -62,7 +68,7 @@ employee_availability = [
 # Define the employee class schedule data
 employee_classSchedule = [
     {"subject": "Physics", "start": "09:15:00 AM", "end": "12:00:00 PM", "meetingDays": "UM"},
-    {"subject": "Math", "start": "6:05:00 PM", "end": "3:15:00 PM", "meetingDays": "UR"},
+    {"subject": "Math", "start": "3:05:00 PM", "end": "4:15:00 PM", "meetingDays": "UR"},
     {"subject": "Hello", "start": "11:35:00 AM", "end": "9:45:00 PM", "meetingDays": "FA"},
     {"subject": "Science", "start": "05:00:00 AM", "end": "07:25:00 AM", "meetingDays": "T"}
 ]
@@ -141,7 +147,23 @@ available_times_per_day = process_class_schedule(available_times_per_day, employ
 # Condense available times into ranges for each day
 condensed_available_times_per_day = condense_available_times_per_day(available_times_per_day)
 
-# Convert to 12-hour format and print the results
+avail_ranges = []
+# Convert to 12-hour format and add to list of available time ranges 
 for day, ranges in condensed_available_times_per_day.items():
     formatted_ranges = format_ranges_12_hour(ranges)
     print(f"{day}: {formatted_ranges}")
+    avail_ranges.append(formatted_ranges)
+
+updatedData = []
+for i in range(1, 8):
+    updatedData.append({
+        "DayId": i,
+        "AvailableRanges": avail_ranges[i-1], 
+        "EmployeeExternalId": 170601496   
+    })
+
+updateAvailability(updatedData)
+
+
+    
+    
